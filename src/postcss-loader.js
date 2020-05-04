@@ -5,9 +5,9 @@ import findPostcssConfig from 'postcss-load-config'
 import { identifier } from 'safe-identifier'
 import humanlizePath from './utils/humanlize-path'
 import normalizePath from './utils/normalize-path'
+import stringHashCode from './utils/string-hash-code'
 
-const styleInjectPath = require
-  .resolve('style-inject/dist/style-inject.es')
+const styleInjectPath = path.resolve(__dirname, '..', 'style-inject.js')
   .replace(/[\\/]+/g, '/')
 
 function loadConfig(id, { ctx: configOptions, path: configPath }) {
@@ -203,13 +203,19 @@ export default {
       if (typeof options.inject === 'function') {
         output += options.inject(cssVariableName, this.id)
       } else {
-        output += '\n' +
-          `import styleInject from '${styleInjectPath}';\n` +
-          `styleInject(${cssVariableName}${
-            Object.keys(options.inject).length > 0 ?
-              `,${JSON.stringify(options.inject)}` :
-              ''
-          });`
+        const args = [
+          cssVariableName,
+          Object.keys(options.inject).length > 0 ?
+            JSON.stringify(options.inject) :
+            'undefined',
+          JSON.stringify(stringHashCode(this.id))
+        ]
+        output += [
+          '',
+          `import styleInject from '${styleInjectPath}';`,
+          `styleInject(${args.join(', ')});`,
+          'if (import.meta.hot) import.meta.hot.accept()'
+        ].join('\n')
       }
     }
 

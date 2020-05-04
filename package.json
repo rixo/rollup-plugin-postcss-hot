@@ -1,10 +1,11 @@
 {
-  "name": "rollup-plugin-postcss",
-  "version": "3.0.0",
-  "description": "Seamless integration between Rollup and PostCSS",
+  "name": "rollup-plugin-postcss-hot",
+  "version": "0.0.0",
+  "description": "Seamless integration between Rollup and PostCSS with HMR support",
   "main": "dist/index.js",
   "files": [
-    "dist"
+    "dist",
+    "style-inject.js"
   ],
   "scripts": {
     "test": "npm run lint && jest",
@@ -15,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/egoist/rollup-plugin-postcss.git"
+    "url": "git+https://github.com/rixo/rollup-plugin-postcss-hot.git"
   },
   "keywords": [
     "postcss",
@@ -24,13 +25,13 @@
   "author": "EGOIST <0x142857@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/egoist/rollup-plugin-postcss/issues"
+    "url": "https://github.com/rixo/rollup-plugin-postcss-hot/issues"
   },
   "engines": {
     "node": ">=10"
   },
   "types": "./types/index.d.ts",
-  "homepage": "https://github.com/egoist/rollup-plugin-postcss#readme",
+  "homepage": "https://github.com/rixo/rollup-plugin-postcss-hot#readme",
   "devDependencies": {
     "@babel/core": "^7.9.0",
     "@babel/preset-env": "^7.9.5",
