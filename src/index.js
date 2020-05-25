@@ -23,7 +23,7 @@ export default (options = {}) => {
   const { sourceMap } = options
   const postcssLoaderOptions = {
     /** Inject CSS as `<style>` to `<head>` */
-    inject: options.hot || (typeof options.inject === 'function' ? options.inject : inferOption(options.inject, {})),
+    inject: options.hot || (typeof options.inject === 'function' ? options.inject : inferOption(options.inject, false)),
     /** Extract CSS */
     extract: typeof options.extract === 'undefined' ? false : options.extract,
     /** CSS modules */
