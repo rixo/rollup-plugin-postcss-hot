@@ -1,3 +1,17 @@
+# rollup-plugin-postcss-hot
+
+## Version 0.0.2
+
+- add `hot` option to better support `extract` option
+
+## Version 0.0.1
+
+- support for HMR with `rollup-plugin-hot`
+
+---
+
+# rollup-plugin-postcss
+
 ## [Version 2.0.3](https://github.com/egoist/rollup-plugin-postcss/releases/tag/v2.0.3) (2019-1-31)
 
 ### Bug fixes

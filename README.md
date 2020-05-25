@@ -19,3 +19,21 @@ yarn add rollup-plugin-postcss-hot --dev
 ## Usage
 
 Usage should be exactly the same as the original plugin. Please refer to `rollup-plugin-postcss`'s docs.
+
+There's only a `hot` option added:
+
+```js
+const HOT = !!process.env.HOT // for example
+
+...
+
+postcss({
+  hot: HOT,
+  extract: path.resolve(''),
+  sourceMap: true,
+}),
+```
+
+When the `hot` option is `true`, [inject](https://github.com/egoist/rollup-plugin-postcss#inject) option will be forcefully enabled and, if you have [extract](https://github.com/egoist/rollup-plugin-postcss#extract) option (like in the above example), an empty file will be written in this location.
+
+The empty file avoid a 404 if your app tries to load the file normally. It is emptied because otherwise the content of the file initially loaded by the browser could conflict with CSS inject by HMR.

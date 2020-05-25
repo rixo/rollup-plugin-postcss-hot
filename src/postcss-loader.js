@@ -182,7 +182,7 @@ export default {
     }
 
     const cssVariableName = identifier('css', true)
-    if (shouldExtract) {
+    if (shouldExtract && !shouldInject) {
       output += `export default ${JSON.stringify(modulesExported[this.id])};`
       extracted = {
         id: this.id,
@@ -199,7 +199,7 @@ export default {
         `export const stylesheet=${JSON.stringify(result.css)};`
     }
 
-    if (!shouldExtract && shouldInject) {
+    if (shouldInject) {
       if (typeof options.inject === 'function') {
         output += options.inject(cssVariableName, this.id)
       } else {

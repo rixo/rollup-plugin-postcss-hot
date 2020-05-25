@@ -23,7 +23,7 @@ export default (options = {}) => {
   const { sourceMap } = options
   const postcssLoaderOptions = {
     /** Inject CSS as `<style>` to `<head>` */
-    inject: typeof options.inject === 'function' ? options.inject : inferOption(options.inject, {}),
+    inject: options.hot || (typeof options.inject === 'function' ? options.inject : inferOption(options.inject, {})),
     /** Extract CSS */
     extract: typeof options.extract === 'undefined' ? false : options.extract,
     /** CSS modules */
@@ -157,14 +157,16 @@ export default (options = {}) => {
           )
         }
 
-        for (const result of entries) {
-          const relative = normalizePath(path.relative(dir, result.id))
-          const map = result.map || null
-          if (map) {
-            map.file = fileName
-          }
+        if (!options.hot) {
+          for (const result of entries) {
+            const relative = normalizePath(path.relative(dir, result.id))
+            const map = result.map || null
+            if (map) {
+              map.file = fileName
+            }
 
-          concat.add(relative, result.code, map)
+            concat.add(relative, result.code, map)
+          }
         }
 
         let code = concat.content
