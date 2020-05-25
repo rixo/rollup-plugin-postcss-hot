@@ -2,7 +2,9 @@
 
 ## Version 0.0.2
 
-- add `hot` option to better support `extract` option
+- add hot option for extract support  2cb6009
+
+ [...full changes](https://github.com/rixo/rollup-plugin-postcss-hot/compare/v0.0.1...v0.0.2)
 
 ## Version 0.0.1
 
