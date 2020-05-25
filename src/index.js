@@ -21,11 +21,12 @@ export default (options = {}) => {
     options.plugins.filter(Boolean) :
     options.plugins
   const { sourceMap } = options
+  const extract = typeof options.extract === 'undefined' ? false : options.extract
   const postcssLoaderOptions = {
     /** Inject CSS as `<style>` to `<head>` */
-    inject: options.hot || (typeof options.inject === 'function' ? options.inject : inferOption(options.inject, false)),
+    inject: options.hot || (typeof options.inject === 'function' ? options.inject : inferOption(options.inject, !extract)),
     /** Extract CSS */
-    extract: typeof options.extract === 'undefined' ? false : options.extract,
+    extract,
     /** CSS modules */
     modules: inferOption(options.modules, false),
     namedExports: options.namedExports,
