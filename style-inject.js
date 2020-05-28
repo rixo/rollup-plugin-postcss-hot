@@ -1,14 +1,21 @@
 /* eslint-env browser */
 
-function styleInject(css, ref, id) {
+function styleInject(css = '', ref, id) {
   if (ref === undefined) ref = {}
   const { insertAt } = ref
 
-  document
-    .querySelectorAll('[data-module="' + id + '"]')
-    .forEach(element => element.remove())
+  const previous = document.querySelectorAll('[data-module="' + id + '"]')
 
-  if (!css || typeof document === 'undefined') return
+  // NOTE we want to inject the style el at the same position in the DOM to
+  // respect equal power selectors priority (last one wins)
+  const anchor = previous[previous.length - 1]
+
+  const remove = () => previous.forEach(element => element.remove())
+
+  if (typeof document === 'undefined') {
+    remove()
+    return
+  }
 
   const head = document.head || document.querySelector('head')
   const style = document.createElement('style')
@@ -16,7 +23,9 @@ function styleInject(css, ref, id) {
 
   style.dataset.module = id
 
-  if (insertAt === 'top') {
+  if (anchor) {
+    anchor.parentNode.insertBefore(style, anchor)
+  } else if (insertAt === 'top') {
     if (head.firstChild) {
       head.insertBefore(style, head.firstChild)
     } else {
@@ -25,6 +34,8 @@ function styleInject(css, ref, id) {
   } else {
     head.append(style)
   }
+
+  remove()
 
   if (style.styleSheet) {
     style.styleSheet.cssText = css
