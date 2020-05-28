@@ -1,5 +1,13 @@
 # rollup-plugin-postcss-hot
 
+## Version 0.0.5
+
+- fix same power selectors priority (hot consistency with normal)  1108c44
+
+CSS stylesheets injected by HMR are inserted at the same DOM location as the stylesheet they replace -- so that priority of same power selectors in different stylesheets is preserved.
+
+https://github.com/rixo/rollup-plugin-postcss-hot/compare/v0.0.2...v0.0.5
+
 ## Version 0.0.2
 
 - add hot option for extract support  2cb6009
