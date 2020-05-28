@@ -1,6 +1,6 @@
 {
   "name": "rollup-plugin-postcss-hot",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Seamless integration between Rollup and PostCSS with HMR support",
   "main": "dist/index.js",
   "files": [
